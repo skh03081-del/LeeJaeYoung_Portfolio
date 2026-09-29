@@ -45,21 +45,28 @@
             background-size: 100% 100%, 100% 100%, 100% 40px;
         }
 
-        /* --- 1. STADIUM MATCH HUD TOP BAR --- */
+        /* --- 1. STADIUM MATCH HUD TOP BAR (우측 상단 뱃지 수직 정렬 교정) --- */
         .fsf-top-bar {
-            width: 100%; height: 46px; background: rgba(9, 19, 29, 0.95);
+            width: 100%; height: 50px; background: rgba(9, 19, 29, 0.95);
             border-bottom: 2px solid var(--fsf-green); display: flex;
             align-items: center; justify-content: space-between; padding: 0 30px;
             font-family: 'Teko', sans-serif; position: sticky; top: 0; z-index: 9999;
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 20px rgba(0, 230, 118, 0.2);
         }
-        .top-nav { display: flex; gap: 25px; font-weight: 700; font-size: 1.25rem; letter-spacing: 1px; }
+        .top-nav { display: flex; align-items: center; gap: 25px; font-weight: 700; font-size: 1.25rem; letter-spacing: 1px; }
         .top-nav span { color: var(--text-sub); cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
         .top-nav span.active, .top-nav span:hover { color: var(--fsf-green); text-shadow: 0 0 12px var(--fsf-green-glow); }
-        .top-user-stats { display: flex; gap: 16px; font-weight: 700; font-size: 1.1rem; }
-        .stat-badge { background: rgba(0, 230, 118, 0.12); border: 1px solid var(--fsf-border); padding: 2px 12px; border-radius: 2px; color: #fff; }
-        .stat-badge .val { color: var(--fsf-orange); margin-left: 5px; }
+        
+        /* [수정] 우측 상단 뱃지 정밀 중앙 정렬 */
+        .top-user-stats { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.15rem; }
+        .stat-badge { 
+            display: inline-flex; align-items: center; justify-content: center;
+            height: 30px; background: rgba(0, 230, 118, 0.12); border: 1px solid var(--fsf-border); 
+            padding: 0 14px; border-radius: 2px; color: #fff; line-height: 1;
+            font-family: 'Teko', sans-serif; letter-spacing: 0.8px;
+        }
+        .stat-badge .val { color: var(--fsf-orange); margin-left: 6px; font-weight: 700; }
 
         /* --- 2. MATCH TICKER STRIP --- */
         .ticker-strip {
@@ -70,7 +77,7 @@
         }
         .ticker-strip .highlight { color: var(--fsf-green); text-shadow: 0 0 8px var(--fsf-green); }
 
-        /* --- 3. HERO SECTION (야간 경기장 조명 연출) --- */
+        /* --- 3. HERO SECTION (슬로건 수직 정렬 교정) --- */
         .hero { 
             position: relative; width: 100%; height: 290px; display: flex; align-items: center; justify-content: center; overflow: hidden; 
             border-bottom: 3px solid var(--fsf-green);
@@ -85,15 +92,16 @@
         
         .hero-content { position: relative; z-index: 2; text-align: center; max-width: 950px; padding: 10px 0; }
         
-        /* 전광판 MVP 타이틀 배너 연출 */
         .winner-banner {
             background: var(--fsf-green); color: #000; font-family: 'Oswald', sans-serif;
             font-size: 1.4rem; font-weight: 900; padding: 6px 30px; letter-spacing: 4px;
-            display: inline-block; margin-bottom: 12px; transform: skewX(-12deg) scale(1.8);
+            display: inline-flex; align-items: center; justify-content: center;
+            margin-bottom: 14px; transform: skewX(-12deg) scale(1.8);
             box-shadow: 0 0 35px var(--fsf-green-glow);
             border: 2px solid #FFFFFF; text-transform: uppercase;
             opacity: 0; filter: blur(10px);
             transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease, filter 0.4s ease;
+            line-height: 1.2;
         }
         .winner-banner.visible { opacity: 1; filter: blur(0); transform: skewX(-12deg) scale(1); }
 
@@ -105,11 +113,13 @@
         .cursor-blink { display: inline-block; width: 12px; animation: blink 0.8s step-end infinite; color: var(--fsf-green); }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
         
+        /* [수정] 메인 슬로건 위아래 비율 및 정렬 완벽 교정 */
         .main-slogan-text { 
-            margin-top: 14px; padding: 6px 24px; background: rgba(17, 30, 43, 0.92); 
-            border: 1px solid var(--fsf-green); display: inline-block; font-size: 1.05rem; color: #fff; 
+            margin-top: 16px; padding: 10px 24px; background: rgba(17, 30, 43, 0.92); 
+            border: 1px solid var(--fsf-green); display: inline-flex; align-items: center; justify-content: center;
+            font-size: 1.05rem; color: #fff; font-family: 'Noto Sans KR', sans-serif;
             font-weight: 700; opacity: 0; transition: 0.8s; letter-spacing: 0.5px;
-            box-shadow: 0 0 15px rgba(0, 230, 118, 0.15);
+            box-shadow: 0 0 15px rgba(0, 230, 118, 0.15); line-height: 1.4;
         }
 
         .reveal-section { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
@@ -139,7 +149,7 @@
         .filter-btn:hover { border-color: var(--fsf-green); color: #fff; }
         .filter-btn.active { background: var(--fsf-green); color: #000; font-weight: 900; border-color: var(--fsf-green); box-shadow: 0 0 12px var(--fsf-green-glow); }
 
-        /* --- 5. PROJECT CARDS (라인 마킹 스타일) --- */
+        /* --- 5. PROJECT CARDS --- */
         .project-container { 
             max-width: 1250px; margin: 0 auto 70px; padding: 0 20px; 
             display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; 
@@ -214,7 +224,7 @@
             margin-top: 6px; display: flex; align-items: center; gap: 6px; letter-spacing: 1px;
         }
 
-        /* --- 6. PLAYER STATS / LOADOUT --- */
+        /* --- 6. PLAYER STATS / LOADOUT (스킬명 개선 적용) --- */
         .loadout-wrapper { max-width: 1250px; margin: 0 auto 80px; padding: 0 20px; }
         .loadout-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .gear-card {
@@ -340,7 +350,7 @@
         </div>
     </header>
 
-    <!-- 4. MISSION STAGES (우레/프리스타일 풋볼 2 직무 순서) -->
+    <!-- 4. MISSION STAGES -->
     <div id="stage-section" class="reveal-section">
         <div class="section-header">
             <div class="section-title-box">
@@ -358,7 +368,6 @@
 
         <div class="project-container" id="projectGrid">
             
-            <!-- 1순위: 축구 게임 라이브 서비스 경험 (EA Korea FCO 수비 AI/지표 분석) -->
             <div class="project-card" data-cat="FOOTBALL LIVE" onclick="openModal(0, event)">
                 <div class="card-img-box"><img src="P3.png"></div>
                 <div class="card-info-box">
@@ -374,7 +383,6 @@
                 </div>
             </div>
 
-            <!-- 2순위: 축구 시스템 & 코어루프 & BM (FCO 신규 시스템) -->
             <div class="project-card" data-cat="FOOTBALL BM" onclick="openModal(1, event)">
                 <div class="card-img-box"><img src="P4.png"></div>
                 <div class="card-info-box">
@@ -390,7 +398,6 @@
                 </div>
             </div>
 
-            <!-- 3순위: BM 상품 기획 & 아이템 테이블 관리 (던파 BM 분석) -->
             <div class="project-card" data-cat="BM" onclick="openModal(2, event)">
                 <div class="card-img-box"><img src="P10.png"></div>
                 <div class="card-info-box">
@@ -406,7 +413,6 @@
                 </div>
             </div>
 
-            <!-- 4순위: 축구 룰 연계성 & 개발 구현 (자체개발 리듬축구) -->
             <div class="project-card" data-cat="FOOTBALL STORY" onclick="openModal(3, event)">
                 <div class="card-img-box"><img src="P1.png"></div>
                 <div class="card-info-box">
@@ -422,7 +428,6 @@
                 </div>
             </div>
 
-            <!-- 5순위: 세계관, 튜토리얼 연출 및 데이터 매니저 (다인 협업 코코두기) -->
             <div class="project-card" data-cat="STORY" onclick="openModal(4, event)">
                 <div class="card-img-box"><img src="P2.png"></div>
                 <div class="card-info-box">
@@ -438,7 +443,6 @@
                 </div>
             </div>
 
-            <!-- 6순위: 캐릭터 메커니즘 & 슈팅 고증 (배그 신규 총기 기획) -->
             <div class="project-card" data-cat="STORY" onclick="openModal(5, event)">
                 <div class="card-img-box"><img src="P7.png"></div>
                 <div class="card-info-box">
@@ -454,7 +458,6 @@
                 </div>
             </div>
 
-            <!-- 7순위: 익스트랙션 & PVPVE 장르 분석 (아크레이더스) -->
             <div class="project-card" data-cat="STORY" onclick="openModal(6, event)">
                 <div class="card-img-box"><img src="P9.jpg"></div>
                 <div class="card-info-box">
@@ -470,7 +473,6 @@
                 </div>
             </div>
 
-            <!-- 8순위: 수치 검증 자동화 툴 (밸런스 시뮬레이터) -->
             <div class="project-card" data-cat="BM" onclick="openModal(7, event)">
                 <div class="card-img-box"><img src="P6_1.PNG"></div>
                 <div class="card-info-box">
@@ -486,7 +488,6 @@
                 </div>
             </div>
 
-            <!-- 9순위: 메이징 경로 & 레벨 디자인 (자체개발 디펜스) -->
             <div class="project-card" data-cat="STORY" onclick="openModal(8, event)">
                 <div class="card-img-box"><img src="P8.png"></div>
                 <div class="card-info-box">
@@ -502,7 +503,6 @@
                 </div>
             </div>
 
-            <!-- 10순위: 공공 데이터 정밀 시각화 (QGIS 분석) -->
             <div class="project-card" data-cat="BM" onclick="openModal(9, event)">
                 <div class="card-img-box"><img src="P5.png"></div>
                 <div class="card-info-box">
@@ -557,6 +557,7 @@
                 </div>
             </div>
 
+            <!-- [수정] 스킬 항목을 직무에 맞게 캐릭터 설정 & 연출/대사 기획으로 변경 -->
             <div class="gear-card">
                 <div class="gear-card-header">
                     <span class="gear-title"><i class="fas fa-headset"></i> GK/DEV: STORY & ENGINE</span>
@@ -564,7 +565,7 @@
                 </div>
                 <div class="gear-skill-list">
                     <div class="gear-skill-item"><span><i class="fas fa-cubes"></i> 언리얼 5 블루프린트 / 엔진</span> <span class="stat-val">LV.2</span></div>
-                    <div class="gear-skill-item"><span><i class="fas fa-book-open"></i> 세계관 창작 및 성우 대본</span> <span class="stat-val">LV.2</span></div>
+                    <div class="gear-skill-item"><span><i class="fas fa-pen-nib"></i> 캐릭터 설정 & 연출/대사 기획</span> <span class="stat-val">LV.2</span></div>
                     <div class="gear-skill-item"><span><i class="fas fa-gamepad"></i> GameMaker (GML)</span> <span class="stat-val">LV.2</span></div>
                     <div class="gear-skill-item"><span><i class="fas fa-brain"></i> AI API & QGIS</span> <span class="stat-val">LV.2</span></div>
                 </div>
