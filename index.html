@@ -35,7 +35,7 @@
         * { box-sizing: border-box; }
         body, button, input { font-family: 'Teko', 'Noto Sans KR', sans-serif; }
         
-        /* 야간 축구장 스태디움 배경 연출 (빛 반사 완화) */
+        /* 야간 축구장 스태디움 배경 연출 */
         body { 
             background-color: var(--fsf-dark-pitch); color: var(--text-main); 
             margin: 0; padding: 0; line-height: 1.5; overflow-x: hidden;
@@ -46,7 +46,7 @@
             background-size: 100% 100%, 100% 100%, 100% 40px;
         }
 
-        /* --- 1. STADIUM MATCH HUD TOP BAR --- */
+        /* --- 1. STADIUM MATCH HUD TOP BAR (상하 수직 정렬 정밀 교정) --- */
         .fsf-top-bar {
             width: 100%; height: 50px; background: rgba(11, 19, 27, 0.95);
             border-bottom: 2px solid var(--fsf-green); display: flex;
@@ -55,16 +55,23 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
-        .top-nav { display: flex; align-items: center; gap: 25px; font-weight: 700; font-size: 1.25rem; letter-spacing: 1px; }
-        .top-nav span { color: var(--text-sub); cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
+        .top-nav { display: flex; align-items: center; gap: 25px; font-weight: 700; font-size: 1.25rem; letter-spacing: 1px; height: 100%; }
+        .top-nav span { 
+            color: var(--text-sub); cursor: pointer; transition: 0.2s; 
+            display: inline-flex; align-items: center; gap: 8px; line-height: 1;
+            padding-top: 3px; /* Teko 폰트 특성상 위로 치우치는 현상 수정 */
+        }
+        .top-nav span i { display: inline-block; font-size: 1.1rem; transform: translateY(-1px); }
         .top-nav span.active, .top-nav span:hover { color: var(--fsf-green); }
         
-        .top-user-stats { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.15rem; }
+        /* 우측 상단 뱃지 상하 정중앙 정렬 교정 */
+        .top-user-stats { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.15rem; height: 100%; }
         .stat-badge { 
             display: inline-flex; align-items: center; justify-content: center;
-            height: 30px; background: rgba(16, 185, 129, 0.08); border: 1px solid var(--fsf-border); 
-            padding: 0 14px; border-radius: 2px; color: #fff; line-height: 1;
-            font-family: 'Teko', sans-serif; letter-spacing: 0.8px;
+            height: 32px; background: rgba(16, 185, 129, 0.08); border: 1px solid var(--fsf-border); 
+            padding: 4px 14px 0 14px; /* 위쪽에 4px 패딩을 주어 텍스트 수직 중앙 정렬 */
+            border-radius: 2px; color: #fff; line-height: 1;
+            font-family: 'Teko', sans-serif; letter-spacing: 0.8px; box-sizing: border-box;
         }
         .stat-badge .val { color: var(--fsf-orange); margin-left: 6px; font-weight: 700; }
 
